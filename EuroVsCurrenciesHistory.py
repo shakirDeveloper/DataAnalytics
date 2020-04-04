@@ -7,8 +7,10 @@ Created on Sat Mar 28 15:49:15 2020
 
 import requests
 from bs4 import BeautifulSoup
+import unittest, csv
+import os
 
-pathOfWriteData = 'C:\\Big Data\\BD_CA_1_Output_{0}.csv'
+pathOfWriteData = 'C:\\Documents\\Post Graduate Study\\Higher Diploma DA\\Big Data\\BD_CA_1_Output_{0}.csv'
 def get_website_content():
     
     cookies = {
@@ -53,9 +55,8 @@ def save_csv(commits,title,lastUpdated):
         csv_file.write(str(commit))
     csv_file.close()
 
-def extract_html_content():
-    html = get_website_content()
-    html_data = BeautifulSoup(html.content, "html.parser")
+def extract_html_content(htmlContent):    
+    html_data = BeautifulSoup(htmlContent.content, "html.parser")
     tables = html_data.find_all("tbody")
     for table in tables:
         cells = table.find_all('td')
@@ -76,6 +77,39 @@ def extract_html_content():
         save_csv(currencyDetail,title.text,last_update.text)
 
 def main():
-    extract_html_content()
+    html = get_website_content()
+    extract_html_content(html)
 
 main()
+
+#### Unit test
+#### to run please uncomment line 114 and 115
+class EuroVsCurrenciesUnitTests(unittest.TestCase):
+   
+    def test_get_api_contents(self):
+        self.assertNotEqual(get_website_content(), '')
+
+    def test_load_data(self):
+        csv_directory_path = 'C:\\Documents\\Post Graduate Study\\Higher Diploma DA\\Big Data\\'
+        latest_file_name = ''
+        count = 0
+        
+        testHtml = get_website_content()
+        extract_html_content(testHtml)
+        
+        #get the first and latest csv file name 
+        for filename in os.listdir(csv_directory_path):
+           if filename.endswith('.csv'):
+               latest_file_name =csv_directory_path + filename
+                
+        global test_data_file_object, test_data_row_list
+        # open test data csv file.
+        test_data_file_object = open(latest_file_name, 'r')
+        # read the csv file and return the text line list.
+        csv_reader = csv.reader(test_data_file_object, delimiter=',')
+        for row in csv_reader:            
+            count += 1
+        self.assertNotEqual(count,0)
+
+if __name__ == '__main__':
+    unittest.main()
