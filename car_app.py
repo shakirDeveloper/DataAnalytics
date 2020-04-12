@@ -13,7 +13,7 @@ models = [random.choice(available_models) for i in range(40)]
 mileages = [random.choice(available_mileage) for i in range(40)]
 
 cars = []
-i=0
+
 for number in range(0, 40):
     car = Car()
     car.setColour(colours[number])
@@ -21,17 +21,10 @@ for number in range(0, 40):
     car.setMileage(mileages[number])
     car.setModel(models[number])
     cars.append(car)
-    print(car.getMake())
-    #print(cars[i].getColour())
-    i+=1
-
+    
 
 car_fleet = CarFleet(cars)
 car_fleet.mainMenu()
-#car_fleet.rentCar(5)
-#car_fleet.returnCar(2)
-#car_fleet.returnCar(3)
-
 
 
 

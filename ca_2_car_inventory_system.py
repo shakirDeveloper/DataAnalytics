@@ -125,7 +125,7 @@ class DieselCar(Car):
 class CarFleet():
     
     def __init__(self,cars):
-        self.__pathOfWriteData = 'C:\\BD_CA_2_Output.csv'
+        self.__pathOfWriteData = 'C:\\Documents\\Post Graduate Study\\Higher Diploma DA\\Big Data\\CA2\\BD_CA_2_Output.csv'
         self.__petrol_cars = []
         self.__electric_cars = []
         self.__diesel_cars = []
