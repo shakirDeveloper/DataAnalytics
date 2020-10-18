@@ -26,17 +26,17 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">DOTNETLOVER</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWjalaFs26EqNlatCiPYVNgAAAAACAAAAAAAQZgAAAAEAACAAAAAg/fDf3j9XUoBicBfb1zlHKzcml0zYRt5vA2M5NQHBoQAAAAAOgAAAAAIAACAAAACbPY8KBz/wraPMCnxOu0W2Op9iY5cV6iEVwfn+ph1TsZAAAAA4LHpy0oO8y8YZRWW2NKNc7fAQASEwYzwI60YYUFSjbdcjG0R/lZe8d0UFnEBrhqpcF0GZZf2ba5946EqKiEf/VT4Bn6Y7NuTwnpCt5u62RpymedL4gFTBqaNG5Bm/WuMD9+TjMOmnplNUOCF3zW7AM8swphtbBIffDo9u3qzwwfGaGCU6CfgNSxEYW06OV0BAAAAAuW5JFuZKkLfvPbxWr1mFVMigg8OEXLUTey/aLPnO3lR4ia3+aiixGJNepop1qS46wnvh3C7vtFAtF5nleaBtHA==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWjalaFs26EqNlatCiPYVNgAAAAACAAAAAAAQZgAAAAEAACAAAADcWSxDBGFbnnO62ipNtu7a+jnljKNKWYlcT5AjsvAhvQAAAAAOgAAAAAIAACAAAADl9hqWLze4Z8RKEXbGUGkRZ6eYLIMPb/z5p3u3YtiJIZAAAACtH3TtWnQ4hIZNNcWcBsp16zgBf1l5WfipdlTE7Rj899Gv+WVdBylXmsrXPff7b52UPbCA5RxnMCfSsOSxXdSH+DdXTVWSM95XDtvy7kEXbNQUP8fHsMS7TcjzDh4SFFUCH4Ybmh3lUV8KZmQJ9Sqt8l9PEgkZwb/f7YN/CIgYEwWZ2VcWLNFcOzQI4682VvBAAAAAxNYqTP1yCKFxuOkr3tCxkLjq/ejdXfroYkD/Ipk1SAlxab/fJklyu5ppm/p0xRuXEdsJ6KV8QB2w+cW4IWpM7Q==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
-          <SSIS:Package SSIS:Name="StoreSales_ETL.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="Aleem_Fratoni_Cannella.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers />
         <SSIS:DeploymentInfo>
           <SSIS:ProjectConnectionParameters />
           <SSIS:PackageInfo>
-            <SSIS:PackageMetaData SSIS:Name="StoreSales_ETL.dtsx">
+            <SSIS:PackageMetaData SSIS:Name="Aleem_Fratoni_Cannella.dtsx">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">{C75D0E76-B6D3-418C-963A-C972ACCCAAD2}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Package</SSIS:Property>
