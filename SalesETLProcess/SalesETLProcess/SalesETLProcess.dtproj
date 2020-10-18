@@ -26,17 +26,17 @@
           <SSIS:Property SSIS:Name="CreatorComputerName">DOTNETLOVER</SSIS:Property>
           <SSIS:Property SSIS:Name="Description">
           </SSIS:Property>
-          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWjalaFs26EqNlatCiPYVNgAAAAACAAAAAAAQZgAAAAEAACAAAACTss6pwV1UcnHvhOu7rdTHRh+DgjlYgAmZBJbRsU+VBQAAAAAOgAAAAAIAACAAAAA2i62GX6IQTqcPeimYKVBNN0SQb+n7vOWwk/GWoSnFjpAAAAAaGXwW5WleQUogaxtO9rZUPnum79fDjeTyM6Q+wlyfE5KvbciQuM/VLvYLalQfsDHACV8oPwoCJWz3Kpdt5gU7pDKBqNGKj3USz1DScTJGrMKlheclhlxHGhgY6aE34pO+Q5t+MXJYf0yXGHUMP7KkCsY8/xbLdPyUaIvTBlGp27HVaI+6zTmyYC0eXgYGiUpAAAAA4dcRbodVssMFpGkfOVN70/0V24HHvrtQyR+cPmOZHp1u0kU0X/lQAmDa8A5l7JTyDi4DxwyPo4/BeK1vYqgJlg==</SSIS:Property>
+          <SSIS:Property SSIS:Name="PasswordVerifier" SSIS:Sensitive="1">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAWjalaFs26EqNlatCiPYVNgAAAAACAAAAAAAQZgAAAAEAACAAAADu5T5wkKJZQhwWbz76GYttVp4wTe3BZOjfCq3ZliSFtwAAAAAOgAAAAAIAACAAAACA5I1lJxUy7AdAuV/9YeTNA7ZkWWPWpgIN1HaHB2/HUpAAAAA9QDxEgtijeC8p3MwTy7sjElr0pXD9XiB4GYAFxcPcCM54W3UmbW558MzckgjInKZhp3wVo1QeBOLeviNEPheYW749qDE+XEbuAf+H+3ERy952HtQA73MJrUmuqyqMlsUP36F27EhhBQYeaYjXPjpMrDpbP/6skvEQwIQ6p6Sv6v0A8o412XkpR97Sq3ZY/4pAAAAAzYPZcWRdYwbVRQX/3TLZhtoD5hFk4NwToT25VK6UD97UqC/wi/CgCiyZVneCRKQe5NAJoFtvcIKkOYv3PQCITA==</SSIS:Property>
           <SSIS:Property SSIS:Name="FormatVersion">1</SSIS:Property>
         </SSIS:Properties>
         <SSIS:Packages>
-          <SSIS:Package SSIS:Name="StoreSales_ETL.dtsx" SSIS:EntryPoint="1" />
+          <SSIS:Package SSIS:Name="Aleem_Fratoni_Cannella.dtsx" SSIS:EntryPoint="1" />
         </SSIS:Packages>
         <SSIS:ConnectionManagers />
         <SSIS:DeploymentInfo>
           <SSIS:ProjectConnectionParameters />
           <SSIS:PackageInfo>
-            <SSIS:PackageMetaData SSIS:Name="StoreSales_ETL.dtsx">
+            <SSIS:PackageMetaData SSIS:Name="Aleem_Fratoni_Cannella.dtsx">
               <SSIS:Properties>
                 <SSIS:Property SSIS:Name="ID">{C75D0E76-B6D3-418C-963A-C972ACCCAAD2}</SSIS:Property>
                 <SSIS:Property SSIS:Name="Name">Package</SSIS:Property>
@@ -80,7 +80,7 @@
           <ConfigurationSetting>
             <Id>LastModifiedTime</Id>
             <Name>LastModifiedTime</Name>
-            <Value xsi:type="xsd:dateTime">2020-10-18T17:15:58.1296172Z</Value>
+            <Value xsi:type="xsd:dateTime">2020-10-18T17:06:40.2845614Z</Value>
           </ConfigurationSetting>
         </ParameterConfigurationValues>
       </Options>
