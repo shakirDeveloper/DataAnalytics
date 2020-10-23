@@ -11,9 +11,969 @@
   DTS:LocaleID="2057"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionGUID="{54227D4A-918F-452B-B3EB-34EEE396B1E8}">
+  DTS:VersionBuild="5"
+  DTS:VersionGUID="{05FF6017-CE52-45A0-B24E-A82CE0D9ED48}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
-  <DTS:Variables />
-  <DTS:Executables />
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DOTNETLOVER]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{862394E1-C218-497B-B9C8-890BB21DF7AB}"
+      DTS:ObjectName="DOTNETLOVER">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DOTNETLOVER;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DOTNETLOVER.Publisher]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{E6D28FC0-E48F-4623-A984-756EB006559C}"
+      DTS:ObjectName="DOTNETLOVER.Publisher">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DOTNETLOVER;Initial Catalog=Publisher;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DOTNETLOVER.Publisher 1]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{49A76B66-4B8B-4BF4-BFF6-EF9081CDE5EE}"
+      DTS:ObjectName="DOTNETLOVER.Publisher 1">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DOTNETLOVER;Initial Catalog=Publisher;Provider=MSOLEDBSQL.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DOTNETLOVER\.PublisherDW]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{35F03755-8B95-4C42-BDF2-D6301EA5E323}"
+      DTS:ObjectName="DOTNETLOVER\.PublisherDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=DOTNETLOVER\;Initial Catalog=PublisherDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{37EDE07B-F3EA-46A7-BFB4-E59C30D2A040}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="ETLID">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{7584FDA2-87B3-4DD7-BD4A-5FDD25118A46}"
+      DTS:IncludeInDebugDump="6789"
+      DTS:Namespace="User"
+      DTS:ObjectName="RecordCount">
+      <DTS:VariableValue
+        DTS:DataType="3">0</DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Empty staging table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Delete all the store records from staging table"
+      DTS:DTSID="{C27F574D-D50F-4FA1-882D-0AE9C91DBE02}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Empty staging table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{35F03755-8B95-4C42-BDF2-D6301EA5E323}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE stg_stores_dim" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\load staging table"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{57F628F6-6802-4EC7-8E1D-0E02DEE52E8B}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="load staging table"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\load staging table\get data from operational tables"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="get data from operational tables"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT stores.stor_id, stores.stor_name,'' as prev_stor_name,stores.city,stores.[state],
+		discounts.discounttype, discounts.lowqty, discounts.highqty, discounts.discount
+FROM            stores INNER JOIN
+                         discounts ON stores.stor_id = discounts.stor_id</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\load staging table\get data from operational tables.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DOTNETLOVER.Publisher]"
+                  connectionManagerRefId="Package.ConnectionManagers[DOTNETLOVER.Publisher]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[stor_id]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[stor_id]"
+                      length="20"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[stor_id]"
+                      name="stor_id"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[stor_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[stor_name]"
+                      length="40"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[stor_name]"
+                      name="stor_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[prev_stor_name]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[prev_stor_name]"
+                      length="1"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[prev_stor_name]"
+                      name="prev_stor_name"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      length="20"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[city]"
+                      name="city"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                      length="2"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[state]"
+                      name="state"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[discounttype]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[discounttype]"
+                      length="40"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[discounttype]"
+                      name="discounttype"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[lowqty]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[lowqty]"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[lowqty]"
+                      name="lowqty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[highqty]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[highqty]"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[highqty]"
+                      name="highqty"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[discount]"
+                      dataType="numeric"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[discount]"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[discount]"
+                      name="discount"
+                      precision="4"
+                      scale="2"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[stor_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="stor_id" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[stor_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="stor_name" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[prev_stor_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      name="prev_stor_name" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="state" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[discounttype]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="discounttype" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[lowqty]"
+                      dataType="i2"
+                      name="lowqty" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[highqty]"
+                      dataType="i2"
+                      name="highqty" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].ExternalColumns[discount]"
+                      dataType="numeric"
+                      name="discount"
+                      precision="4"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[stor_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[stor_id]"
+                      name="stor_id" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[stor_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[stor_name]"
+                      name="stor_name" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[prev_stor_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[prev_stor_name]"
+                      name="prev_stor_name" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[city]"
+                      name="city" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[state]"
+                      name="state" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[discounttype]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[discounttype]"
+                      name="discounttype" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[lowqty]"
+                      dataType="i2"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[lowqty]"
+                      name="lowqty" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[highqty]"
+                      dataType="i2"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[highqty]"
+                      name="highqty" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[discount]"
+                      dataType="numeric"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[discount]"
+                      name="discount"
+                      precision="4"
+                      scale="2" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\load staging table\load staging table"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="load staging table"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[stg_stores_dim]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\load staging table\load staging table.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DOTNETLOVER\.PublisherDW]"
+                  connectionManagerRefId="Package.ConnectionManagers[DOTNETLOVER\.PublisherDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].Columns[stor_id]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="stor_id"
+                      externalMetadataColumnId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[stor_id]"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[stor_id]" />
+                    <inputColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].Columns[stor_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="stor_name"
+                      externalMetadataColumnId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[stor_name]"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[stor_name]" />
+                    <inputColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].Columns[prev_stor_name]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1"
+                      cachedName="prev_stor_name"
+                      externalMetadataColumnId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[prev_stor_name]"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[prev_stor_name]" />
+                    <inputColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].Columns[city]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="20"
+                      cachedName="city"
+                      externalMetadataColumnId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[city]" />
+                    <inputColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].Columns[state]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="2"
+                      cachedName="state"
+                      externalMetadataColumnId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[state]" />
+                    <inputColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].Columns[discounttype]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="discounttype"
+                      externalMetadataColumnId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[discounttype]"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[discounttype]" />
+                    <inputColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].Columns[lowqty]"
+                      cachedDataType="i2"
+                      cachedName="lowqty"
+                      externalMetadataColumnId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[lowqty]"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[lowqty]" />
+                    <inputColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].Columns[highqty]"
+                      cachedDataType="i2"
+                      cachedName="highqty"
+                      externalMetadataColumnId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[highqty]"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[highqty]" />
+                    <inputColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].Columns[discount]"
+                      cachedDataType="numeric"
+                      cachedName="discount"
+                      cachedPrecision="4"
+                      cachedScale="2"
+                      externalMetadataColumnId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[discount]"
+                      lineageId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output].Columns[discount]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[stor_key]"
+                      dataType="i4"
+                      name="stor_key" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[stor_id]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="stor_id" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[stor_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="stor_name" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[prev_stor_name]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="prev_stor_name" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[city]"
+                      codePage="1252"
+                      dataType="str"
+                      length="20"
+                      name="city" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[state]"
+                      codePage="1252"
+                      dataType="str"
+                      length="2"
+                      name="state" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[discounttype]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="discounttype" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[lowqty]"
+                      dataType="i2"
+                      name="lowqty" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[highqty]"
+                      dataType="i2"
+                      name="highqty" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[discount]"
+                      dataType="numeric"
+                      name="discount"
+                      precision="4"
+                      scale="2" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[dateinserted]"
+                      dataType="dbDate"
+                      name="dateinserted" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[dateupdated]"
+                      dataType="dbDate"
+                      name="dateupdated" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[startdate]"
+                      dataType="dbDate"
+                      name="startdate" />
+                    <externalMetadataColumn
+                      refId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input].ExternalColumns[enddate]"
+                      dataType="dbDate"
+                      name="enddate" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\load staging table\load staging table.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\load staging table\load staging table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\load staging table\load staging table.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\load staging table\load staging table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\load staging table\load staging table.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\load staging table.Paths[OLE DB Source Output]"
+              endId="Package\load staging table\load staging table.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\load staging table\get data from operational tables.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\merge records to dim"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="merge stage table record into dimension table"
+      DTS:DTSID="{9E89E0AB-DBFE-4504-8689-2DD193CA356E}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="merge records to dim"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{35F03755-8B95-4C42-BDF2-D6301EA5E323}"
+          SQLTask:SqlStatementSource="DECLARE @PST datetime&#xA;SET @PST = getdate( )&#xA;EXEC Merge_Stores_Dim&#xA;@PackageStartTime = @PST,&#xA;@RecordCount = ? OUTPUT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::RecordCount"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Start ETL Logging"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="create start etl logging record"
+      DTS:DTSID="{795EF243-177B-4DD0-8EFE-E03106B5BCF9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Start ETL Logging"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{35F03755-8B95-4C42-BDF2-D6301EA5E323}"
+          SQLTask:SqlStatementSource="EXEC CreateETLLoggingRecord -- Executing stored procedure to start ETL Logging&#xA;@TableName = 'stores_dim',&#xA;@ETLID = ? OUTPUT" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ETLID"
+            SQLTask:ParameterDirection="Output"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\update etl logging table"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{029739CE-1187-439D-B835-2502A88721D9}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="update etl logging table"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{35F03755-8B95-4C42-BDF2-D6301EA5E323}"
+          SQLTask:SqlStatementSource="EXEC UpdateETLLoggingRecord&#xA;@ETLID = ?,&#xA;@RecordCount = ?" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask">
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="0"
+            SQLTask:DtsVariableName="User::ETLID"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+          <SQLTask:ParameterBinding
+            SQLTask:ParameterName="1"
+            SQLTask:DtsVariableName="User::RecordCount"
+            SQLTask:ParameterDirection="Input"
+            SQLTask:DataType="3"
+            SQLTask:ParameterSize="-1" />
+        </SQLTask:SqlTaskData>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{3D058853-FF08-44FC-811B-5B8B0AEB7D7D}"
+      DTS:From="Package\load staging table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\merge records to dim" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{3168746A-B895-4B48-A082-D931C9E88D97}"
+      DTS:From="Package\merge records to dim"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\update etl logging table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{C929D079-A90A-45B7-87EA-9EC47E87AD85}"
+      DTS:From="Package\Start ETL Logging"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Empty staging table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{7DB471EF-5D2D-4760-8D9E-56AC271DC052}"
+      DTS:From="Package\Empty staging table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\load staging table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="175,42"
+          Id="Package\Empty staging table"
+          TopLeft="235,82" />
+        <NodeLayout
+          Size="165,42"
+          Id="Package\load staging table"
+          TopLeft="239,150" />
+        <NodeLayout
+          Size="170,42"
+          Id="Package\merge records to dim"
+          TopLeft="238,222" />
+        <NodeLayout
+          Size="167,42"
+          Id="Package\Start ETL Logging"
+          TopLeft="239,20" />
+        <NodeLayout
+          Size="193,42"
+          Id="Package\update etl logging table"
+          TopLeft="230,298" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="322.25,192">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,30"
+              Start="0,0"
+              End="0,22.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="324.75,264">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,34"
+              Start="0,0"
+              End="0,26.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,26.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="239,41">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-4,62"
+              Start="0,0"
+              End="-11.5,62">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="-22.5,0" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-22.5,0"
+                    Point2="-26.5,0"
+                    Point3="-26.5,4" />
+                  <mssgle:LineSegment
+                    End="-26.5,58" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-26.5,58"
+                    Point2="-26.5,62"
+                    Point3="-22.5,62" />
+                  <mssgle:LineSegment
+                    End="-11.5,62" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="322,124">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,26"
+              Start="0,0"
+              End="0,18.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\load staging table">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="165,42"
+          Id="Package\load staging table\load staging table"
+          TopLeft="272,157" />
+        <NodeLayout
+          Size="233,42"
+          Id="Package\load staging table\get data from operational tables"
+          TopLeft="249,51" />
+        <EdgeLayout
+          Id="Package\load staging table.Paths[OLE DB Source Output]"
+          TopLeft="365.5,93">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11,64"
+              Start="0,0"
+              End="-11,56.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,28" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,28"
+                    Point2="0,32"
+                    Point3="-4,32" />
+                  <mssgle:LineSegment
+                    End="-7,32" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7,32"
+                    Point2="-11,32"
+                    Point3="-11,36" />
+                  <mssgle:LineSegment
+                    End="-11,56.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\load staging table\get data from operational tables">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\load staging table\load staging table">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
 </DTS:Executable>
